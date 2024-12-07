@@ -54,10 +54,18 @@ async function getComments() {
 	return [
 		{
 			id: 1,
+			user: {
+				name: 'Romain Lanz',
+				avatarUrl: 'https://avatars.githubusercontent.com/u/2793951',
+			},
 			body: 'This is a comment',
 		},
 		{
 			id: 2,
+			user: {
+				name: 'Julien Ripouteau',
+				avatarUrl: 'https://avatars.githubusercontent.com/u/8337858',
+			},
 			body: 'This is another comment',
 		},
 	];

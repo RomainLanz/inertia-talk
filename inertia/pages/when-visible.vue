@@ -21,7 +21,14 @@
 
 		<div class="flex flex-col gap-4">
 			<div class="bg-gray-100 border border-gray-300 rounded-lg p-4" v-for="comment in comments" :key="comment.id">
-				{{ comment.body }}
+				<div class="flex gap-2 items-center">
+					<img class="h-8 rounded-full" :src="comment.user.avatarUrl" alt="" />
+					<p class="text-xl font-bold">{{ comment.user.name }}</p>
+				</div>
+
+				<p class="mt-4">
+					{{ comment.body }}
+				</p>
 			</div>
 		</div>
 	</WhenVisible>
