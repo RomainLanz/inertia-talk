@@ -54,6 +54,15 @@
 							Deferred props
 						</Link>
 					</li>
+					<li>
+						<Link
+							class="hover:text-blue-500 transition-colors"
+							:class="{ 'text-blue-500': $page.url === '/fragment' }"
+							href="/fragment"
+						>
+							Fragments
+						</Link>
+					</li>
 				</ul>
 			</div>
 		</aside>

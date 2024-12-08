@@ -1,12 +1,16 @@
 <script lang="ts" setup>
+	import { computed } from 'vue';
+	import { useForm, usePage } from '@inertiajs/vue3';
 	import PageTitle from '~/components/page_title.vue';
-	import { useForm } from '@inertiajs/vue3';
 
 	const form = useForm({
 		name: '',
 		email: '',
 		message: '',
 	});
+
+	const page = usePage();
+	const pageProps = computed(() => page.props);
 
 	function onSubmit() {
 		form.post('/contact');
@@ -16,25 +20,44 @@
 <template>
 	<PageTitle title="Contact" />
 
+	<div v-if="pageProps.flashMessagesSuccess" class="bg-green-300 border border-green-400 rounded-lg p-4 mb-8">
+		{{ pageProps.flashMessagesSuccess }}
+	</div>
+
 	<div class="flex gap-4">
 		<form @submit.prevent="onSubmit" class="flex flex-col gap-4 w-1/2">
-			<label>
-				<span class="block">Name</span>
-				<input v-model="form.name" type="text" class="border border-gray-300 rounded-lg p-2 w-96" />
-				<span v-if="form.errors.name" class="text-red-500">
-					{{ form.errors.name }}
-				</span>
-			</label>
+			<div>
+				<label>
+					<span class="block">Name</span>
+					<input v-model="form.name" type="text" class="border border-gray-300 rounded-lg p-2 w-96" />
+				</label>
 
-			<label>
-				<span class="block">Email</span>
-				<input v-model="form.email" type="email" class="border border-gray-300 rounded-lg p-2 w-96" />
-			</label>
+				<p v-if="form.errors.name" class="text-red-500">
+					{{ form.errors.name[0] }}
+				</p>
+			</div>
 
-			<label>
-				<span class="block">Message</span>
-				<textarea v-model="form.message" class="border border-gray-300 rounded-lg p-2 w-96"></textarea>
-			</label>
+			<div>
+				<label>
+					<span class="block">Email</span>
+					<input v-model="form.email" type="email" class="border border-gray-300 rounded-lg p-2 w-96" />
+				</label>
+
+				<p v-if="form.errors.email" class="text-red-500">
+					{{ form.errors.email[0] }}
+				</p>
+			</div>
+
+			<div>
+				<label>
+					<span class="block">Message</span>
+					<textarea v-model="form.message" class="border border-gray-300 rounded-lg p-2 w-96"></textarea>
+				</label>
+
+				<p v-if="form.errors.message" class="text-red-500">
+					{{ form.errors.message[0] }}
+				</p>
+			</div>
 
 			<div>
 				<button
