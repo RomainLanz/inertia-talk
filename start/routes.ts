@@ -9,7 +9,9 @@ router.get('/', ({ inertia }) => {
 router.get('about', async ({ inertia }) => {
 	await setTimeout(1000);
 
-	return inertia.render('about');
+	return inertia.render('about', {
+		serverTime: new Date().toISOString(),
+	});
 });
 
 router.get('contact', ({ inertia }) => {
